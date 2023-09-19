@@ -3,7 +3,7 @@ FROM node:18-alpine
 WORKDIR /usr/app
 
 COPY index.mjs .
-COPY packaje.json .
+COPY package.json .
 COPY package-lock.json .
 COPY /src ./src/
 

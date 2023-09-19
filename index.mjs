@@ -5,7 +5,7 @@ import FiltersRouter from "./src/handlers/filters/index.mjs";
 import Boom from "@hapi/boom";
 import { PORT } from "./src/commons/env.mjs";
 import multer from "multer"; 
-
+import fs from "fs";
 const app = Express();
 app.use(bodyParser.json());
 
@@ -19,8 +19,25 @@ app.get("/", (req, res) => {
 
 
 app.post("/images", upload.single("file"), (req, res) => {
- 
-  res.send("Archivo cargado correctamente");
+  if (!req.file) {
+    return res.status(400).send("No se proporcionó un archivo");
+  }
+  if (!req.body.filters) {
+    return res.status(400).send("No se proporcionó un filtro");
+  }
+  
+  const nombreArchivo = "nombre_personalizado.jpg"; 
+
+
+  fs.writeFile(nombreArchivo, req.file.buffer, (err) => {
+    if (err) {
+      console.error("Error al guardar el archivo:", err);
+      return res.status(500).send("Error al guardar el archivo");
+    }
+
+   
+    res.send("Archivo guardado correctamente");
+  });
 });
 
 app.use("/images", FiltersRouter);

@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports: 
-      -3001:5001
+      - 3001:5001
     networks:
       - processor-net
 
