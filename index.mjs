@@ -24,7 +24,7 @@ app.post("/images", upload.array("images"), (req, res) => {
     return res.status(400).send("No se proporcionó un filtro");
   }
 
-  console.log(req.body);
+  console.log(req);
 
   res.send("Archivo enviado correctamente");
 });
