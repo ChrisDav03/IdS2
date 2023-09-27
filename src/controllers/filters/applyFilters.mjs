@@ -4,7 +4,7 @@ import Boom from "@hapi/boom";
 import { BLUR_FILTER, GREYSCALE_FILTER, NEGATIVE_FILTER } from "../../commons/constans.mjs";
 
 const PayloadValidation = Joi.object({
-    filters: Joi.array().min(1).items(Joi.string().valid(
+    filters: Joi.array().required.min(1).items(Joi.string().valid(
         NEGATIVE_FILTER, GREYSCALE_FILTER, BLUR_FILTER
     ))
 })
